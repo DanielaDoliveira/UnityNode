@@ -26,6 +26,17 @@ public class MenuManager : MonoBehaviour
     public Text message_text;
     public Button close_button;
 
+    [Space]
+    [Header("Menu Game")]
+    public GameObject menuGame_canvas;
+
+    [Space]
+    [Header("REST")]
+    public REST_Controller rest_script;
+
+    string menu_email;
+    string menu_password;
+
     private void Start()
     {
         StartPanelLoginElements();
@@ -42,8 +53,15 @@ public class MenuManager : MonoBehaviour
     #region ####### Assigning events to panel elements #######
     void StartPanelLoginElements()
     {
+        menu_email = "";
+        menu_password = "";
+
         login_button.onClick.AddListener(Button_Login);
         login_newreg_button.onClick.AddListener(Button_Login_NewRegister);
+
+        login_email.text = PlayerPrefs.GetString("PLAYER_EMAIL","");
+        login_password.text = PlayerPrefs.GetString("PLAYER_PASSWORD", "");
+
 
     }
 
@@ -77,15 +95,38 @@ public class MenuManager : MonoBehaviour
 
     #region ####### Canvas Manager #######
 
+    // Function that recieves on <Message> format
     void MenuActive(GameObject canvas)
     {
+     
         login_canvas.gameObject.SetActive(login_canvas.name.Equals(canvas.name));
         register_canvas.gameObject.SetActive(register_canvas.name.Equals(canvas.name));
         message_canvas.gameObject.SetActive(message_canvas.name.Equals(canvas.name));
+        menuGame_canvas.gameObject.SetActive(menuGame_canvas.name.Equals(canvas.name));
+    }
+
+    // If it's allright Starts the Game
+    void GetMessage(Message p_msg)
+    {
+        if(p_msg.GetMessage()!= "")
+        {
+            message_text.text = p_msg.GetMessage();
+            EnableOtherCanvas(message_canvas, true);
+            return;
+        }
+        StartGame();
     }
 
     #endregion
 
+    #region ####### START THE GAME #######
+
+    void StartGame()
+    {
+        MenuActive(menuGame_canvas);
+    }
+
+    #endregion
 
     #region ####### Login Validation #######
 
@@ -122,6 +163,8 @@ public class MenuManager : MonoBehaviour
             EnableOtherCanvas(message_canvas,true);
             return;
         }
+
+        Login_Send(email_temp,pw_temp);
     }
     #endregion
 
@@ -182,6 +225,8 @@ public class MenuManager : MonoBehaviour
             EnableOtherCanvas(message_canvas, true);
             return;
         }
+
+        Register_Send(email_temp, pw_temp);
     }
 
 
@@ -192,6 +237,7 @@ public class MenuManager : MonoBehaviour
     void Button_Login_NewRegister()
     {
         MenuActive(register_canvas);
+        
     }
 
     #endregion
@@ -205,5 +251,18 @@ public class MenuManager : MonoBehaviour
 
     #endregion
 
+    #region ####### REST FUNCTIONS #######
+
+    void Login_Send(string p_email, string p_password)
+    {
+        rest_script.SendRestGetLogin(p_email, p_password, GetMessage);
+    }
+
+
+    void Register_Send(string p_email, string p_password)
+    {
+        rest_script.SendRestPostRegister(p_email, p_password, GetMessage);
+    }
+    #endregion
 
 }

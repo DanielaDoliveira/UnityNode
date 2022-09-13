@@ -3279,6 +3279,8 @@ MonoBehaviour:
   message_canvas: {fileID: 1761422686}
   message_text: {fileID: 1389204044}
   close_button: {fileID: 618779856}
+  menuGame_canvas: {fileID: 1793034473}
+  rest_script: {fileID: 1747316202}
 --- !u!4 &1747316199
 Transform:
   m_ObjectHideFlags: 0
@@ -3364,18 +3366,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793034473}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.86875, y: 1.86875, z: 1.86875}
   m_Children:
   - {fileID: 2090025667}
-  m_Father: {fileID: 1986580771}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -700, y: -350}
+  m_AnchoredPosition: {x: 400.00003, y: 225.01674}
+  m_SizeDelta: {x: 100, y: 100.03345}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1857898397
 GameObject:
@@ -3804,7 +3806,6 @@ RectTransform:
   - {fileID: 610963019}
   - {fileID: 261233181}
   - {fileID: 1761422687}
-  - {fileID: 1793034474}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
