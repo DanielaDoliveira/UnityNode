@@ -123,12 +123,21 @@ public class MenuManager : MonoBehaviour
 
     void StartGame()
     {
+        if (menu_email != "" && menu_password!= "")
+        {
+            PlayerPrefs.SetString("PLAYER_EMAIL", menu_email);
+            PlayerPrefs.SetString("PLAYER_PASSWORD", menu_password);
+        }
+        else
+        {
+            Debug.Log("[PlayerPrefs]The try to save email and password failed");
+        }
         MenuActive(menuGame_canvas);
     }
 
     #endregion
 
-    #region ####### Login Validation #######
+    #region ####### Button_Login #######
 
     void Button_Login()
     {
@@ -163,6 +172,8 @@ public class MenuManager : MonoBehaviour
             EnableOtherCanvas(message_canvas,true);
             return;
         }
+        menu_email = email_temp;
+        menu_password = pw_temp;
 
         Login_Send(email_temp,pw_temp);
     }
@@ -180,7 +191,7 @@ public class MenuManager : MonoBehaviour
     #endregion
 
 
-    #region ####### Register Validation #######
+    #region ####### Button_Register #######
     void Button_Register()
     {
         bool error = false;
@@ -226,6 +237,8 @@ public class MenuManager : MonoBehaviour
             return;
         }
 
+        menu_email = email_temp;
+        menu_password = pw_temp;
         Register_Send(email_temp, pw_temp);
     }
 
