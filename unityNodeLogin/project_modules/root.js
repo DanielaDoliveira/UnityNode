@@ -14,7 +14,7 @@ const validator = require('validator');
  //#region ------- GET -------
 //ROOT
 root.get('/',function(req,res){
-  console.log("Passando no : Entrando no GET/");
+  console.log("[root.js]Passando no : Entrando no GET/");
   res.send("<h1>Welcome to routes!</br> </h1> <h2>This is the Root.</h2>");
   
 })

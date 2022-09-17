@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Security.Cryptography;
 public class MenuManager : MonoBehaviour
 {
     [Header("Login")]
@@ -175,6 +176,7 @@ public class MenuManager : MonoBehaviour
         menu_email = email_temp;
         menu_password = pw_temp;
 
+        pw_temp = CryptPassword(pw_temp);
         Login_Send(email_temp,pw_temp);
     }
     #endregion
@@ -239,6 +241,7 @@ public class MenuManager : MonoBehaviour
 
         menu_email = email_temp;
         menu_password = pw_temp;
+        pw_temp = CryptPassword(pw_temp);
         Register_Send(email_temp, pw_temp);
     }
 
@@ -278,4 +281,20 @@ public class MenuManager : MonoBehaviour
     }
     #endregion
 
+
+
+    string CryptPassword(string p_password)
+    {
+        MD5 md5 = MD5.Create();
+        string result = "";
+        byte[] data = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(p_password));
+
+        for(int i = 0;i< data.Length; i++)
+        {
+            result += data[i].ToString("");
+        }
+
+        Debug.Log(result);
+        return result; 
+    }
 }
